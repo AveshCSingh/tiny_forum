@@ -1,0 +1,9 @@
+{% if latest_topics %}
+    <ul>
+		{% for topic in latest_topics %}
+		    <li><a href="{% url 'topic' topic.id %}">{{ topic.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No topics have been created.</p>
+{% endif %}

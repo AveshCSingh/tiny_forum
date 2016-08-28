@@ -1,0 +1,6 @@
+<h1>{{ topic.name }}</h1>
+<ul>
+{% for thread in topic.thread_set.all %}
+    <li>{{ thread.title }}</li>
+{% endfor %}
+</ul>
