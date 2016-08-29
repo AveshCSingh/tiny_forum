@@ -1,6 +1,14 @@
 <h1>{{ topic.name }}</h1>
 <ul>
-{% for thread in topic.thread_set.all %}
+{% for thread in latest_threads %}
     <li>{{ thread.title }}</li>
 {% endfor %}
 </ul>
+
+<p> Create a new thread: </p>
+<form action="{% url 'thread-list' %}" method="post">
+{% csrf_token %}
+<input type="text" name="title">
+<input type="hidden" name="topic" value="{% url 'topic-detail' topic.id %}">
+<input type="submit" value="Submit">
+</form>

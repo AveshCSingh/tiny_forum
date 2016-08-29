@@ -6,4 +6,12 @@ class TopicSerializer(serializers.HyperlinkedModelSerializer):
         model = Topic
         fields = ('name', 'date')
 
-# TODO(avesh): Add Thread, Post, and Follow to API
+class ThreadSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Thread
+        fields = ('topic', 'title', 'date')
+
+class PostSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Topic
+        fields = ('thread', 'content', 'user')

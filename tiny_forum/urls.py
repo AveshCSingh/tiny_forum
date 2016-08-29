@@ -22,13 +22,13 @@ import allauth
 admin.autodiscover()
 
 router = routers.DefaultRouter()
-router.register(r'api/topics', views.TopicViewSet)
+router.register(r'topics', views.TopicViewSet)
+router.register(r'threads', views.ThreadViewSet)
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^', include(router.urls)),
+    url(r'', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', admin.site.urls),
-    url(r'^topic/(?P<id>[0-9]+)/$', views.topic, name='topic')
 ]
