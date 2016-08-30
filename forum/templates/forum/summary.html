@@ -1,0 +1,8 @@
+There were {{ num_posts }} posts today.
+<br> <br>
+Most prolific users of the day:
+<br>
+{% for p in user_post_counts %}
+  {{ p }}
+  <br>
+{% endfor %}

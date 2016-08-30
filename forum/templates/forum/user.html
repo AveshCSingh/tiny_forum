@@ -1,0 +1,9 @@
+Username: {{ user.username }}
+<br><br>
+
+<p> Would you like to follow {{ user.username }}? </p>
+<form action="{% url 'follow-list' %}" method="post">
+{% csrf_token %}
+<input type="hidden" name="target" value="{{ user.id }}">
+<input type="submit" value="Submit">
+</form>

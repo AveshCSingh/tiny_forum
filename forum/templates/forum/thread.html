@@ -1,0 +1,15 @@
+<h1>{{ thread.name }}</h1>
+<ul>
+{% for post in posts %}
+    {{ post.user }} :
+    {{ post.content }}
+    <br><br>
+{% endfor %}
+
+<p> Reply: </p>
+<form action="{% url 'post-list' %}" method="post">
+{% csrf_token %}
+<input type="text" name="content">
+<input type="hidden" name="thread" value="{% url 'thread-detail' thread.id %}">
+<input type="submit" value="Submit">
+</form>
