@@ -31,6 +31,7 @@ class BaseRedirectListViewSet(viewsets.ModelViewSet):
 class TopicViewSet(BaseRedirectListViewSet):
     """
     REST API endpoint for viewing/editing Topics.
+    Inherits from BaseRedirectViewSet as topics are listed on the homepage.
     """
     queryset = Topic.objects.all().order_by('-name')
     serializer_class = TopicSerializer
@@ -57,9 +58,10 @@ class ThreadViewSet(viewsets.ModelViewSet):
         posts = thread.post_set.order_by('-date').reverse()
         return render(request, 'forum/thread.html', {'thread' : thread, 'posts' : posts})
 
-class PostViewSet(viewsets.ModelViewSet):
+class PostViewSet(BaseRedirectListViewSet):
     """
     REST API endpoint for viewing/editing Threads.
+    Inherits from BaseRedirectViewSet as listing all posts regardless of thread should not be possible.
     """
     queryset = Post.objects.all().order_by('-date')
     serializer_class = PostSerializer
@@ -82,11 +84,17 @@ class FollowViewSet(viewsets.ModelViewSet):
         serializer.save(source=self.request.user)
 
 class UserList(generics.ListAPIView):
+    """
+    Provides GET handler for listing Users
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
 class UserDetail(generics.RetrieveAPIView):
+    """
+    Proves GET handler for single-user details
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -96,6 +104,11 @@ class UserDetail(generics.RetrieveAPIView):
 
 
 def summary(request, year, month, day):
+    """
+    Provides summary information on the forum on a particularly day:
+      -Total of posts
+      -Number of posts per user
+    """
     posts = Post.objects.filter(Q(date__year=year) & Q(date__month=month) & Q(date__day=day))
     
     user_post_count = {}
