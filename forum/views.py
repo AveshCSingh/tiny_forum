@@ -72,6 +72,9 @@ class FollowViewSet(viewsets.ModelViewSet):
     queryset = Follow.objects.all().order_by('-created_at')
     serializer_class = FollowSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(source=self.request.user)
+
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -80,6 +83,10 @@ class UserList(generics.ListAPIView):
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def retrieve(self, request, pk=None):
+        user = get_object_or_404(User, pk=pk)
+        return render(request, 'forum/user.html', {'user' : user})
 
 
 def summary(request, year, month, day):

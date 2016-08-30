@@ -24,6 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username')
 
 class FollowSerializer(serializers.ModelSerializer):
+    source = serializers.CharField(source='user.pk', read_only=True)
     class Meta:
         model = Follow
         fields = ('source', 'target', 'created_at')
