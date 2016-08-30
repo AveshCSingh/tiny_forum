@@ -1,6 +1,6 @@
-from rest_framework import serializers
-from forum.models import Topic, Thread, Post, Follow, User
 from django.contrib.auth.models import User
+from forum.models import Topic, Thread, Post, Follow, User
+from rest_framework import serializers
 
 
 class TopicSerializer(serializers.HyperlinkedModelSerializer):

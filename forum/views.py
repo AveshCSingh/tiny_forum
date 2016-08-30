@@ -1,12 +1,12 @@
+from .models import Topic, Thread, Post, Follow
+from django.contrib.auth.models import User
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
+from django.views.generic.dates import DayArchiveView
 from forum.serializers import TopicSerializer, ThreadSerializer, PostSerializer, UserSerializer, FollowSerializer
 from rest_framework import viewsets, generics
 from rest_framework.permissions import AllowAny, DjangoModelPermissionsOrAnonReadOnly
-from .models import Topic, Thread, Post, Follow
-from django.contrib.auth.models import User
-from django.views.generic.dates import DayArchiveView
-from django.db.models import Q
 
 
 def index(request):
