@@ -1,9 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
-from forum.serializers import TopicSerializer, ThreadSerializer, PostSerializer, UserSerializer
+from forum.serializers import TopicSerializer, ThreadSerializer, PostSerializer, UserSerializer, FollowSerializer
 from rest_framework import viewsets, generics
 from rest_framework.permissions import AllowAny,DjangoModelPermissionsOrAnonReadOnly
-from .models import Topic, Thread, Post
+from .models import Topic, Thread, Post, Follow
 from django.contrib.auth.models import User
 from django.views.generic.dates import DayArchiveView
 from django.db.models import Q
@@ -63,20 +63,14 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
 
     def perform_create(self, serializer):
-#        import pdb; pdb.set_trace()
         serializer.save(user=self.request.user)
 
-
-#     # def list(self, request):
-
-
-# class UserViewSet(viewsets.ModelViewSet):
-#     """
-#     API endpoint that allows users to be viewed or edited.
-#     """
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-        
+class FollowViewSet(viewsets.ModelViewSet):
+    """
+    REST API endpoint for viewing/editing Follows.
+    """
+    queryset = Follow.objects.all().order_by('-created_at')
+    serializer_class = FollowSerializer
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
@@ -88,14 +82,7 @@ class UserDetail(generics.RetrieveAPIView):
     serializer_class = UserSerializer
 
 
-class AnalyticsView(DayArchiveView):
-    queryset = Post.objects.all()
-    date_field = "date"
-
-    def detail(request, question_id):
-        return HttpResponse("You're looking at ")
-
-def summary2(request, year, month, day):
+def summary(request, year, month, day):
     posts = Post.objects.filter(Q(date__year=year) & Q(date__month=month) & Q(date__day=day))
     
     user_post_count = {}

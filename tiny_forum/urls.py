@@ -25,7 +25,7 @@ router = routers.DefaultRouter()
 router.register(r'topics', views.TopicViewSet)
 router.register(r'threads', views.ThreadViewSet)
 router.register(r'posts', views.PostViewSet)
-#router.register(r'users', views.UserViewSet)
+router.register(r'follows', views.FollowViewSet)
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -37,9 +37,6 @@ urlpatterns = [
     url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
     # Example: summary/2016/08/28/
     url(r'^summary2/(?P<year>[0-9]{4})/(?P<month>[0-9]+)/(?P<day>[0-9]+)/$',
-        views.summary2,
+        views.summary,
         name="analytics"),
-    # url(r'^summary/(?P<year>[0-9]{4})/(?P<month>[-\w]+)/(?P<day>[0-9]+)/$',
-    #     views.AnalyticsView.as_view(),
-    #     name="analytics"),
 ]
