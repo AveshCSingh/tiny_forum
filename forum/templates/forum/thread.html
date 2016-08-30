@@ -1,7 +1,8 @@
 <h1>{{ thread.name }}</h1>
 <ul>
 {% for post in posts %}
-    {{ post.user }} @ {{ post.date }}: {{ post.content }}
+    <a href="/users/{{ post.user.id }}">{{ post.user }}</a>
+    @ {{ post.date }}: {{ post.content }}
     <br><br>
 {% endfor %}
 

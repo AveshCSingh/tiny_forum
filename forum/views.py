@@ -82,7 +82,7 @@ class PostViewSet(BaseRedirectListViewSet):
         return redirect(request.data['thread'])
 
 
-class FollowViewSet(viewsets.ModelViewSet):
+class FollowViewSet(BaseRedirectListViewSet):
     """
     REST API endpoint for viewing/editing Follows.
     """
