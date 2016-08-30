@@ -1,6 +1,6 @@
-{% if latest_topics %}
+{% if topics %}
     <ul>
-		{% for topic in latest_topics %}
+		{% for topic in topics %}
 		    <li><a href="{% url 'topic-detail' topic.id %}">{{ topic.name }}</a></li>
     {% endfor %}
     </ul>

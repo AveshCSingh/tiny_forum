@@ -13,10 +13,10 @@ def index(request):
     """
     Renders the homepage.
     """
-    latest_topics = Topic.objects.order_by('-name')
-    context = {'latest_topics': latest_topics, }
+    topics = Topic.objects.order_by('-name')
+    context = {'topics': topics, }
     return render(request, 'forum/index.html',
-                  {'latest_topics': latest_topics})
+                  {'topics': topics})
 
 
 class BaseRedirectListViewSet(viewsets.ModelViewSet):
