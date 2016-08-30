@@ -24,6 +24,8 @@ admin.autodiscover()
 router = routers.DefaultRouter()
 router.register(r'topics', views.TopicViewSet)
 router.register(r'threads', views.ThreadViewSet)
+router.register(r'posts', views.PostViewSet)
+#router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -31,4 +33,6 @@ urlpatterns = [
     url(r'', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', admin.site.urls),
+    url(r'^users/$', views.UserList.as_view()),
+    url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view())
 ]

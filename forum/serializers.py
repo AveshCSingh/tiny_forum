@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from forum.models import Topic, Thread, Post, Follow
+from forum.models import Topic, Thread, Post, Follow, User
+from django.contrib.auth.models import User
 
 class TopicSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -12,6 +13,17 @@ class ThreadSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('topic', 'title', 'date')
 
 class PostSerializer(serializers.HyperlinkedModelSerializer):
+    user = serializers.CharField(source='user.username', read_only=True)
     class Meta:
-        model = Topic
-        fields = ('thread', 'content', 'user')
+        model = Post
+        fields = ('thread', 'content', 'date', 'user')
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username')
+
+# class UserSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = User
+# #        fields = ('date'

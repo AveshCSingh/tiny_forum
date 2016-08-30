@@ -149,3 +149,7 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
+
+# Looks like Django's JSON serializer can't handler TextFields. User PickleSerializer instead.
+# TODO(avesh): Consider better workaround
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
