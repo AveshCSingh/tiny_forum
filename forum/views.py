@@ -16,11 +16,19 @@ def index(request):
     }
     return render(request, 'forum/index.html', {'latest_topics': latest_topics})
 
-# def topic(request, id):
-    # topic = get_object_or_404(Topic, pk=id)
-    # return render(request, 'forum/topic.html', {'topic': topic})
+class BaseRedirectListViewSet(viewsets.ModelViewSet):
+    """
+    A base class that redirects list and create calls to the homepage
+    """
+    def list(self, request):
+        return redirect('/')
 
-class TopicViewSet(viewsets.ModelViewSet):
+    def create(self, request):
+        viewsets.ModelViewSet.create(self, request)
+        return redirect('/')
+
+
+class TopicViewSet(BaseRedirectListViewSet):
     """
     REST API endpoint for viewing/editing Topics.
     """
@@ -32,18 +40,12 @@ class TopicViewSet(viewsets.ModelViewSet):
         latest_threads = topic.thread_set.order_by('-date')[:10]
         return render(request, 'forum/topic.html', {'topic' : topic, 'latest_threads' : latest_threads})
 
-#     def list(self, request):
-#         return index(request)
-
-#     def create(self, request):
-#         viewsets.ModelViewSet.create(self, request)
-#         return index(request)
 
 class ThreadViewSet(viewsets.ModelViewSet):
     """
     REST API endpoint for viewing/editing Threads.
     """
-    queryset = Thread.objects.all().order_by('-date')
+    queryset = Thread.objects.all().order_by('-date').reverse()
     serializer_class = ThreadSerializer
         
     def create(self, request):
@@ -52,7 +54,7 @@ class ThreadViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
         thread = get_object_or_404(Thread, pk=pk)
-        posts = thread.post_set.order_by('-date')
+        posts = thread.post_set.order_by('-date').reverse()
         return render(request, 'forum/thread.html', {'thread' : thread, 'posts' : posts})
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -64,6 +66,10 @@ class PostViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+    def create(self, request):
+        viewsets.ModelViewSet.create(self, request)
+        return redirect(request.data['thread'])
 
 class FollowViewSet(viewsets.ModelViewSet):
     """

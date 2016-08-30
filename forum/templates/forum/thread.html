@@ -1,8 +1,7 @@
 <h1>{{ thread.name }}</h1>
 <ul>
 {% for post in posts %}
-    {{ post.user }} :
-    {{ post.content }}
+    {{ post.user }} @ {{ post.date }}: {{ post.content }}
     <br><br>
 {% endfor %}
 

@@ -15,8 +15,7 @@ class Thread(models.Model):
 
 class Post(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
-#    content = models.TextField
-    content = models.CharField(max_length=1000)
+    content = models.CharField(max_length=10000)
     date = models.DateTimeField('date published', auto_now_add=True)
     user = models.ForeignKey('auth.User')
 
