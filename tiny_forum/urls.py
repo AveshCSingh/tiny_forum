@@ -34,5 +34,12 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', admin.site.urls),
     url(r'^users/$', views.UserList.as_view()),
-    url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view())
+    url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
+    # Example: summary/2016/08/28/
+    url(r'^summary2/(?P<year>[0-9]{4})/(?P<month>[0-9]+)/(?P<day>[0-9]+)/$',
+        views.summary2,
+        name="analytics"),
+    # url(r'^summary/(?P<year>[0-9]{4})/(?P<month>[-\w]+)/(?P<day>[0-9]+)/$',
+    #     views.AnalyticsView.as_view(),
+    #     name="analytics"),
 ]

@@ -5,6 +5,8 @@ from rest_framework import viewsets, generics
 from rest_framework.permissions import AllowAny,DjangoModelPermissionsOrAnonReadOnly
 from .models import Topic, Thread, Post
 from django.contrib.auth.models import User
+from django.views.generic.dates import DayArchiveView
+from django.db.models import Q
 
 
 def index(request):
@@ -85,3 +87,24 @@ class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+
+class AnalyticsView(DayArchiveView):
+    queryset = Post.objects.all()
+    date_field = "date"
+
+    def detail(request, question_id):
+        return HttpResponse("You're looking at ")
+
+def summary2(request, year, month, day):
+    posts = Post.objects.filter(Q(date__year=year) & Q(date__month=month) & Q(date__day=day))
+    
+    user_post_count = {}
+    for p in posts:
+        user_post_count[p.user] = user_post_count.get(p.user, 0) + 1
+
+    sorted_user_post_counts = []
+    for user, count in user_post_count.items():
+        sorted_user_post_counts.append((count, user.username))
+    sorted_user_post_counts.sort()
+
+    return render(request, 'forum/summary.html', {'user_post_counts' : sorted_user_post_counts[:5], 'num_posts' : len(posts)})
