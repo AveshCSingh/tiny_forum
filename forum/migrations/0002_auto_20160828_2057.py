@@ -19,42 +19,57 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Follow',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='follow creation date')),
-                ('source', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='following', to=settings.AUTH_USER_MODEL)),
-                ('target', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='followed_by', to=settings.AUTH_USER_MODEL)),
-            ],
-        ),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
+                ('created_at', models.DateTimeField(
+                    auto_now_add=True, verbose_name='follow creation date')),
+                ('source', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='following',
+                    to=settings.AUTH_USER_MODEL)),
+                ('target', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='followed_by',
+                    to=settings.AUTH_USER_MODEL)),
+            ], ),
         migrations.AddField(
             model_name='post',
             name='date',
-            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now, verbose_name='date published'),
-            preserve_default=False,
-        ),
+            field=models.DateTimeField(
+                auto_now_add=True,
+                default=django.utils.timezone.now,
+                verbose_name='date published'),
+            preserve_default=False, ),
         migrations.AddField(
             model_name='post',
             name='user',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
-            preserve_default=False,
-        ),
+            field=models.ForeignKey(
+                default=0,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL),
+            preserve_default=False, ),
         migrations.AddField(
             model_name='thread',
             name='date',
-            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now, verbose_name='date published'),
-            preserve_default=False,
-        ),
+            field=models.DateTimeField(
+                auto_now_add=True,
+                default=django.utils.timezone.now,
+                verbose_name='date published'),
+            preserve_default=False, ),
         migrations.AlterField(
             model_name='thread',
             name='title',
-            field=models.CharField(max_length=200, unique=True),
-        ),
+            field=models.CharField(
+                max_length=200, unique=True), ),
         migrations.AlterField(
             model_name='topic',
             name='name',
-            field=models.CharField(max_length=80, unique=True),
-        ),
+            field=models.CharField(
+                max_length=80, unique=True), ),
         migrations.AlterUniqueTogether(
             name='follow',
-            unique_together=set([('source', 'target')]),
-        ),
+            unique_together=set([('source', 'target')]), ),
     ]

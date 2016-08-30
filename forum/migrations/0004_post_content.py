@@ -7,15 +7,13 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('forum', '0003_topic_date'),
-    ]
+    dependencies = [('forum', '0003_topic_date'), ]
 
     operations = [
         migrations.AddField(
             model_name='post',
             name='content',
-            field=models.CharField(default='test', max_length=1000),
-            preserve_default=False,
-        ),
+            field=models.CharField(
+                default='test', max_length=1000),
+            preserve_default=False, ),
     ]

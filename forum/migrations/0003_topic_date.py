@@ -8,15 +8,15 @@ import django.utils.timezone
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('forum', '0002_auto_20160828_2057'),
-    ]
+    dependencies = [('forum', '0002_auto_20160828_2057'), ]
 
     operations = [
         migrations.AddField(
             model_name='topic',
             name='date',
-            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now, verbose_name='date published'),
-            preserve_default=False,
-        ),
+            field=models.DateTimeField(
+                auto_now_add=True,
+                default=django.utils.timezone.now,
+                verbose_name='date published'),
+            preserve_default=False, ),
     ]

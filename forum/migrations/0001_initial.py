@@ -10,38 +10,48 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
             name='Post',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-            ],
-        ),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
+            ], ),
         migrations.CreateModel(
             name='Thread',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
                 ('title', models.CharField(max_length=200)),
-            ],
-        ),
+            ], ),
         migrations.CreateModel(
             name='Topic',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
                 ('name', models.CharField(max_length=80)),
-            ],
-        ),
+            ], ),
         migrations.AddField(
             model_name='thread',
             name='topic',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='forum.Topic'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to='forum.Topic'),
         ),
         migrations.AddField(
             model_name='post',
             name='thread',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='forum.Thread'),
-        ),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='forum.Thread'), ),
     ]

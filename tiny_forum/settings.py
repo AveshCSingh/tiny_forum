@@ -27,7 +27,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -78,7 +77,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tiny_forum.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
@@ -98,19 +96,22 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -125,7 +126,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
@@ -138,16 +138,15 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-FACEBOOK_APP_ID='874134206021788'
+FACEBOOK_APP_ID = '874134206021788'
 # TODO(avesh): Refresh Secret and store in Environment variable before productionalizing
-FACEBOOK_API_SECRET='af4bc95e65935126bf9c1edbfd8c8ad5'
+FACEBOOK_API_SECRET = 'af4bc95e65935126bf9c1edbfd8c8ad5'
 
 AUTHENTICATION_BACKENDS = (
     # Default backend 
     "django.contrib.auth.backends.ModelBackend",
     # allauth backend for Facebook login
-    "allauth.account.auth_backends.AuthenticationBackend",
-)
+    "allauth.account.auth_backends.AuthenticationBackend", )
 
 SITE_ID = 1
 

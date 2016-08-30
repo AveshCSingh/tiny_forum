@@ -23,7 +23,8 @@ class Post(models.Model):
 class Follow(models.Model):
     source = models.ForeignKey('auth.User', related_name='following')
     target = models.ForeignKey('auth.User', related_name='followed_by')
-    created_at = models.DateTimeField('follow creation date', auto_now_add=True)
+    created_at = models.DateTimeField(
+        'follow creation date', auto_now_add=True)
 
     class Meta:
         unique_together = ('source', 'target')
