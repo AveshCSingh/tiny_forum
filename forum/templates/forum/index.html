@@ -14,3 +14,11 @@
 <input type="text" name="name">
 <input type="submit" value="Submit">
 </form>
+
+<br>
+<!-- TODO(avesh): Get rid of these hard-coded paths -->
+{% if not request.user.is_authenticated %}
+Login <a href="/accounts/login"> Here</a>
+{% else %}
+You may logout <a href="/accounts/logout"> here</a> {{ request.user.username }}.
+{% endif %}
