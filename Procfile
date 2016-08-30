@@ -1,0 +1,1 @@
+web: gunicorn tiny_forum.wsgi:application
