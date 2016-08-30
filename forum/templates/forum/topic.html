@@ -1,7 +1,7 @@
 <h1>{{ topic.name }}</h1>
 <ul>
 {% for thread in latest_threads %}
-    <li>{{ thread.title }}</li>
+    <li><a href="{% url 'thread-detail' thread.id %}">{{ thread.title }}</a></li>
 {% endfor %}
 </ul>
 

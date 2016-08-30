@@ -18,10 +18,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# TODO(avesh): Regen key and place in environment variable before productionalizing
 SECRET_KEY = 'p7*@!wo+^m8*15!7s_pdypkq#0p0(00jh)egpe67_kbiptr_9_'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# TODO(avesh): Change to False before productionalizing
 DEBUG = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -82,12 +82,6 @@ WSGI_APPLICATION = 'tiny_forum.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -123,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'PST8PDT'
 
 USE_I18N = True
 
@@ -145,7 +139,7 @@ REST_FRAMEWORK = {
 }
 
 FACEBOOK_APP_ID='874134206021788'
-# TODO(avesh): Remove below and wipe from Git
+# TODO(avesh): Refresh Secret and store in Environment variable before productionalizing
 FACEBOOK_API_SECRET='af4bc95e65935126bf9c1edbfd8c8ad5'
 
 AUTHENTICATION_BACKENDS = (
@@ -158,7 +152,3 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
-
-# Looks like Django's JSON serializer can't handler TextFields. User PickleSerializer instead.
-# TODO(avesh): Consider better workaround
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
