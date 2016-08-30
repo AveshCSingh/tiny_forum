@@ -10,6 +10,9 @@ from rest_framework.permissions import AllowAny, DjangoModelPermissionsOrAnonRea
 
 
 def index(request):
+    """
+    Renders the homepage.
+    """
     latest_topics = Topic.objects.order_by('-name')
     context = {'latest_topics': latest_topics, }
     return render(request, 'forum/index.html',
@@ -18,7 +21,7 @@ def index(request):
 
 class BaseRedirectListViewSet(viewsets.ModelViewSet):
     """
-    A base class that redirects list and create calls to the homepage
+    A base class that redirects list and create calls to the homepage.
     """
 
     def list(self, request):
